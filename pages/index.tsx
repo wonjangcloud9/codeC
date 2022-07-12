@@ -36,7 +36,7 @@ const Home: NextPage = () => {
             <div className="mr-2">🗓</div>
             <div className="mr-2">⬇️</div>
           </div>
-          <div className="w-20 bg-blue-400 rounded-full text-center py-1">
+          <div className="w-20 bg-blue-400 rounded-full text-center py-1 cursor-pointer">
             트윗하기
           </div>
         </div>
