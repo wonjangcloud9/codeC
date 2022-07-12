@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import React from "react";
 import { useForm } from "react-hook-form";
 import useUser from "../lib/client/useUser";
+import usePost from "../lib/client/usePost";
 import useMutation from "../lib/client/useMutation";
 
 interface PostForm {
@@ -10,7 +11,10 @@ interface PostForm {
 
 const Home: NextPage = () => {
   let user = useUser();
+  let posts = usePost();
+  console.log(posts);
   const [post, { loading, data, error }] = useMutation("/api/posts");
+
   const { register, handleSubmit } = useForm<PostForm>();
   const onValid = (validForm: PostForm) => {
     post(validForm);

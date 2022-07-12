@@ -40,15 +40,22 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         post,
       });
     }
+    console.log(post);
   }
   if (req.method === "GET") {
     const posts = await db.post.findMany({
-      orderBy: {
-        createdAt: "desc",
+      include: {
+        user: {
+          select: {
+            email: true,
+          },
+        },
       },
-      take: 10,
     });
-    console.log(posts);
+    res.json({
+      ok: true,
+      posts,
+    });
   }
   return res.status(200).end();
 }
