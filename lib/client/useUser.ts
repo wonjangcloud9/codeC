@@ -13,6 +13,6 @@ export default function useUser() {
       router.replace("/create-account");
     }
   }, [data, router]);
-  console.log(data);
+
   return data;
 }

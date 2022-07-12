@@ -15,7 +15,6 @@ const CreateAccount: NextPage = () => {
     enter(validForm);
     window.location.href = "/log-in";
   };
-  console.log(loading, data, error);
   return (
     <div
       style={{ height: "100vh" }}
