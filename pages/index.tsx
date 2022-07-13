@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import useUser from "../lib/client/useUser";
 import usePost from "../lib/client/usePost";
 import useMutation from "../lib/client/useMutation";
-
+import Link from "next/link";
 interface PostForm {
   question: string;
 }
@@ -12,7 +12,7 @@ interface PostForm {
 const Home: NextPage = () => {
   let user = useUser();
   let posts = usePost();
-  console.log(posts);
+  console.log(posts?.posts);
   const [post, { loading, data, error }] = useMutation("/api/posts");
 
   const { register, handleSubmit } = useForm<PostForm>();
@@ -53,7 +53,7 @@ const Home: NextPage = () => {
           <span className="text-3xl cursor-pointer">✚</span>
         </div>
       </div>
-      <div style={{ height: "100vh" }} className="bg-black px-36">
+      <div style={{ height: "200vh" }} className="bg-black px-36">
         <form onSubmit={handleSubmit(onValid)}>
           <div
             style={{ border: "1px solid rgb(55, 65, 81)" }}
@@ -97,198 +97,46 @@ const Home: NextPage = () => {
             </div>
           </div>
         </form>
-        <div
-          className="text-white p-4 flex justify-start align-middle relative"
-          style={{ border: "1px solid rgb(55, 65, 81)" }}
-        >
-          <div>
-            <img
-              src="http://openimage.interpark.com/goods_image_big/6/4/9/1/7473206491_l.jpg"
-              className="w-16 h-16 rounded-full"
-            />
-          </div>
-          <div className="px-4">
-            <div className="text-white">
-              <span>원장</span>
-              <span className="text-gray-600 ml-2">@원장</span>
-              <span className="text-gray-600 ml-2">2시간</span>
-            </div>
-            <div className="text-sm">
-              팬들하고 소통하려고 만든거지만 제 정신건강을 위해 없앤다면 팬들도
-              이해해줄까요?
-            </div>
-            <div className="text-gray-600 flex justify-around -ml-10">
-              <span>☁︎ 210</span>
-              <span>↻ 794</span>
-              <span>♡ 4,223</span>
-              <span>↱</span>
-            </div>
-          </div>
-          <div className="absolute right-4 text-center">
-            <div>❌</div>
-            <div className="text-gray-600">...</div>
-          </div>
-        </div>
-        <div
-          className="text-white p-4 flex justify-start align-middle relative"
-          style={{ border: "1px solid rgb(55, 65, 81)" }}
-        >
-          <div>
-            <img
-              src="http://openimage.interpark.com/goods_image_big/6/4/9/1/7473206491_l.jpg"
-              className="w-16 h-16 rounded-full"
-            />
-          </div>
-          <div className="px-4">
-            <div className="text-white">
-              <span>원장</span>
-              <span className="text-gray-600 ml-2">@원장</span>
-              <span className="text-gray-600 ml-2">2시간</span>
-            </div>
-            <div className="text-sm">
-              팬들하고 소통하려고 만든거지만 제 정신건강을 위해 없앤다면 팬들도
-              이해해줄까요?
-            </div>
-            <div className="text-gray-600 flex justify-around -ml-10">
-              <span>☁︎ 210</span>
-              <span>↻ 794</span>
-              <span>♡ 4,223</span>
-              <span>↱</span>
-            </div>
-          </div>
-          <div className="absolute right-4 text-center">
-            <div>❌</div>
-            <div className="text-gray-600">...</div>
-          </div>
-        </div>
-        <div
-          className="text-white p-4 flex justify-start align-middle relative"
-          style={{ border: "1px solid rgb(55, 65, 81)" }}
-        >
-          <div>
-            <img
-              src="http://openimage.interpark.com/goods_image_big/6/4/9/1/7473206491_l.jpg"
-              className="w-16 h-16 rounded-full"
-            />
-          </div>
-          <div className="px-4">
-            <div className="text-white">
-              <span>원장</span>
-              <span className="text-gray-600 ml-2">@원장</span>
-              <span className="text-gray-600 ml-2">2시간</span>
-            </div>
-            <div className="text-sm">
-              팬들하고 소통하려고 만든거지만 제 정신건강을 위해 없앤다면 팬들도
-              이해해줄까요?
-            </div>
-            <div className="text-gray-600 flex justify-around -ml-10">
-              <span>☁︎ 210</span>
-              <span>↻ 794</span>
-              <span>♡ 4,223</span>
-              <span>↱</span>
-            </div>
-          </div>
-          <div className="absolute right-4 text-center">
-            <div>❌</div>
-            <div className="text-gray-600">...</div>
-          </div>
-        </div>
-        <div
-          className="text-white p-4 flex justify-start align-middle relative"
-          style={{ border: "1px solid rgb(55, 65, 81)" }}
-        >
-          <div>
-            <img
-              src="http://openimage.interpark.com/goods_image_big/6/4/9/1/7473206491_l.jpg"
-              className="w-16 h-16 rounded-full"
-            />
-          </div>
-          <div className="px-4">
-            <div className="text-white">
-              <span>원장</span>
-              <span className="text-gray-600 ml-2">@원장</span>
-              <span className="text-gray-600 ml-2">2시간</span>
-            </div>
-            <div className="text-sm">
-              팬들하고 소통하려고 만든거지만 제 정신건강을 위해 없앤다면 팬들도
-              이해해줄까요?
-            </div>
-            <div className="text-gray-600 flex justify-around -ml-10">
-              <span>☁︎ 210</span>
-              <span>↻ 794</span>
-              <span>♡ 4,223</span>
-              <span>↱</span>
-            </div>
-          </div>
-          <div className="absolute right-4 text-center">
-            <div>❌</div>
-            <div className="text-gray-600">...</div>
-          </div>
-        </div>
-        <div
-          className="text-white p-4 flex justify-start align-middle relative"
-          style={{ border: "1px solid rgb(55, 65, 81)" }}
-        >
-          <div>
-            <img
-              src="http://openimage.interpark.com/goods_image_big/6/4/9/1/7473206491_l.jpg"
-              className="w-16 h-16 rounded-full"
-            />
-          </div>
-          <div className="px-4">
-            <div className="text-white">
-              <span>원장</span>
-              <span className="text-gray-600 ml-2">@원장</span>
-              <span className="text-gray-600 ml-2">2시간</span>
-            </div>
-            <div className="text-sm">
-              팬들하고 소통하려고 만든거지만 제 정신건강을 위해 없앤다면 팬들도
-              이해해줄까요?
-            </div>
-            <div className="text-gray-600 flex justify-around -ml-10">
-              <span>☁︎ 210</span>
-              <span>↻ 794</span>
-              <span>♡ 4,223</span>
-              <span>↱</span>
-            </div>
-          </div>
-          <div className="absolute right-4 text-center">
-            <div>❌</div>
-            <div className="text-gray-600">...</div>
-          </div>
-        </div>
-        <div
-          className="text-white p-4 flex justify-start align-middle relative"
-          style={{ border: "1px solid rgb(55, 65, 81)" }}
-        >
-          <div>
-            <img
-              src="http://openimage.interpark.com/goods_image_big/6/4/9/1/7473206491_l.jpg"
-              className="w-16 h-16 rounded-full"
-            />
-          </div>
-          <div className="px-4">
-            <div className="text-white">
-              <span>원장</span>
-              <span className="text-gray-600 ml-2">@원장</span>
-              <span className="text-gray-600 ml-2">2시간</span>
-            </div>
-            <div className="text-sm">
-              팬들하고 소통하려고 만든거지만 제 정신건강을 위해 없앤다면 팬들도
-              이해해줄까요?
-            </div>
-            <div className="text-gray-600 flex justify-around -ml-10">
-              <span>☁︎ 210</span>
-              <span>↻ 794</span>
-              <span>♡ 4,223</span>
-              <span>↱</span>
-            </div>
-          </div>
-          <div className="absolute right-4 text-center">
-            <div>❌</div>
-            <div className="text-gray-600">...</div>
-          </div>
-        </div>
+        {posts?.posts.map((post) => (
+          <Link key={post.id} href={`/tweet/${post.id}`}>
+            <a className="">
+              <div
+                className="text-white p-4 flex justify-start align-middle relative"
+                style={{ border: "1px solid rgb(55, 65, 81)" }}
+                key={post.id}
+              >
+                <div>
+                  <img
+                    src="http://openimage.interpark.com/goods_image_big/6/4/9/1/7473206491_l.jpg"
+                    className="w-16 h-16 rounded-full"
+                  />
+                </div>
+                <div className="px-4">
+                  <div className="text-white">
+                    <span>{post.user.name}</span>
+                    <span className="text-gray-600 ml-2">
+                      @{post.user.email}
+                    </span>
+                    <span className="text-gray-600 ml-2">
+                      {post.createdAt.split("T")[0]}
+                    </span>
+                  </div>
+                  <div className="text-sm">{post.question}</div>
+                  <div className="text-gray-600 flex justify-around -ml-6">
+                    <span>☁︎ 210</span>
+                    <span>↻ 794</span>
+                    <span>♡ 4,223</span>
+                    <span>↱</span>
+                  </div>
+                </div>
+                <div className="absolute right-4 text-center">
+                  <div>❌</div>
+                  <div className="text-gray-600">...</div>
+                </div>
+              </div>
+            </a>
+          </Link>
+        ))}
       </div>
     </div>
   );

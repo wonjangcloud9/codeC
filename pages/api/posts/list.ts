@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import withHandler from "../../../../lib/server/withHandler";
-import db from "../../../../lib/server/db";
+import withHandler from "../../../lib/server/withHandler";
 import { withIronSessionApiRoute } from "iron-session/next";
+import console from "console";
+import db from "../../../lib/server/db";
 
 declare module "iron-session" {
   interface IronSessionData {
@@ -12,23 +13,28 @@ declare module "iron-session" {
 }
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const post = await db.post.findUnique({
-    where: {
-      id: +req.query.id.toString(),
-    },
-    include: {
-      user: {
-        select: {
-          name: true,
-          email: true,
+  if (req.method === "GET") {
+    const posts = await db.post.findMany({
+      orderBy: [
+        {
+          createdAt: "desc",
+        },
+      ],
+      include: {
+        user: {
+          select: {
+            email: true,
+            name: true,
+          },
         },
       },
-    },
-  });
-  res.json({
-    ok: true,
-    post,
-  });
+    });
+    res.json({
+      ok: true,
+      posts,
+    });
+  }
+  return res.status(200).end();
 }
 
 export default withIronSessionApiRoute(
