@@ -10,7 +10,28 @@ const Tweet: NextPage = () => {
   const { data, mutate } = useSWR(
     router.query.id ? `/api/posts/${router.query.id}` : null
   );
-  console.log(data);
+  const [like, { loading }] = useMutation(`/api/posts/${router.query.id}/like`);
+  const onWonderClick = () => {
+    mutate(
+      {
+        ...data,
+        post: {
+          ...data.post,
+          _count: {
+            ...data.post._count,
+            like: data.isLike
+              ? data?.post._count.like - 1
+              : data?.post._count.like + 1,
+          },
+        },
+        isLike: !data.isLike,
+      },
+      false
+    );
+    if (!loading) {
+      like({});
+    }
+  };
   return (
     <div>
       <div className="text-white fixed left-20">
@@ -77,6 +98,22 @@ const Tweet: NextPage = () => {
             <span className="text-gray-600">
               {data?.post?.createdAt.split("T")[0]}
             </span>
+            <span className="ml-5 text-gray-600">
+              좋아요 :{" "}
+              {data?.isLike ? (
+                <span className="text-blue-600">
+                  {data?.post?._count?.like}
+                </span>
+              ) : (
+                "0"
+              )}
+            </span>
+            <button
+              className="btn absolute left-96 bg-blue-600 px-2 rounded-2xl cursor-pointer"
+              onClick={onWonderClick}
+            >
+              좋아요
+            </button>
           </div>
         </div>
       </div>

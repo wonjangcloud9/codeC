@@ -12,7 +12,7 @@ interface PostForm {
 const Home: NextPage = () => {
   let user = useUser();
   let posts = usePost();
-  console.log(posts?.posts);
+
   const [post, { loading, data, error }] = useMutation("/api/posts");
 
   const { register, handleSubmit } = useForm<PostForm>();

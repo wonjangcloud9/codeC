@@ -12,32 +12,15 @@ declare module "iron-session" {
 }
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const post = await db.post.findUnique({
-    where: {
-      id: +req.query.id.toString(),
-    },
-    include: {
-      user: {
-        select: {
-          name: true,
-          email: true,
-        },
-      },
-      _count: {
-        select: {
-          like: true,
-        },
-      },
-    },
-  });
+  console.log(req.session?.user?.email);
+  console.log(req.query.id);
   res.json({
     ok: true,
-    post,
   });
 }
 
 export default withIronSessionApiRoute(
-  withHandler({ method: "GET", handler }),
+  withHandler({ method: "POST", handler }),
   {
     cookieName: "carrotSession",
     password: "1232131223313231223131212313212312312213432414fadfsdafdasfds34",
