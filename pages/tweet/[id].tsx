@@ -32,6 +32,7 @@ const Tweet: NextPage = () => {
       like({});
     }
   };
+  console.log(data);
   return (
     <div>
       <div className="text-white fixed left-20">
@@ -105,7 +106,9 @@ const Tweet: NextPage = () => {
                   {data?.post?._count?.like}
                 </span>
               ) : (
-                "0"
+                <span className="text-blue-600">
+                  {data?.post?._count?.like}
+                </span>
               )}
             </span>
             <button

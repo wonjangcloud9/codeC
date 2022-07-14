@@ -30,9 +30,20 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       },
     },
   });
+  const isLike = Boolean(
+    await db.like.findFirst({
+      where: {
+        postId: +req.query.id.toString(),
+      },
+      select: {
+        id: true,
+      },
+    })
+  );
   res.json({
     ok: true,
     post,
+    isLike,
   });
 }
 

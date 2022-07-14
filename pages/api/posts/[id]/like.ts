@@ -14,6 +14,37 @@ declare module "iron-session" {
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log(req.session?.user?.email);
   console.log(req.query.id);
+  const alreadyExists = await db.like.findFirst({
+    where: {
+      postId: +req.query.id.toString(),
+    },
+    select: {
+      id: true,
+    },
+  });
+  if (alreadyExists) {
+    await db.like.delete({
+      where: {
+        id: alreadyExists.id,
+      },
+    });
+  } else {
+    await db.like.create({
+      data: {
+        user: {
+          connect: {
+            email: req.session.user?.email,
+          },
+        },
+        post: {
+          connect: {
+            id: +req.query.id.toString(),
+          },
+        },
+      },
+    });
+  }
+  console.log(alreadyExists);
   res.json({
     ok: true,
   });
